@@ -2,14 +2,15 @@
 extends EditorPlugin
 
 
+const INPUT_DETECTOR := "InputDetector"
+
+
 func _enable_plugin() -> void:
-    # Add autoloads here.
-    pass
+    add_autoload_singleton(INPUT_DETECTOR, "res://addons/commons/globals/input_detector.gd")
 
 
 func _disable_plugin() -> void:
-    # Remove autoloads here.
-    pass
+    remove_autoload_singleton(INPUT_DETECTOR)
 
 
 func _enter_tree() -> void:
