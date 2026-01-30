@@ -4,16 +4,8 @@ extends Node
 enum Source { KEYBOARD_MOUSE, CONTROLLER }
 enum Controller { NONE, XBOX, PLAYSTATION, SWITCH, GENERIC }
 
-var _current_source := Source.KEYBOARD_MOUSE
-var current_source: Source:
-    get: return _current_source
-    set(_value): pass # ignore set
-
-var _current_controller_type := Controller.NONE
-var current_controller_type: Controller:
-    get: return _current_controller_type
-    set(_value): pass # ignore set
-
+var current_source := Source.KEYBOARD_MOUSE
+var current_controller_type := Controller.NONE
 var deadzone_filter := 0.2
 
 signal source_changed()
@@ -42,6 +34,6 @@ func _input(event: InputEvent) -> void:
         else:
             controller_type = Controller.GENERIC
     if source != current_source or controller_type != current_controller_type:
-        _current_source = source
-        _current_controller_type = controller_type
+        current_source = source
+        current_controller_type = controller_type
         source_changed.emit()
