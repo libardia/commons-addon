@@ -6,7 +6,8 @@ const INPUT_DETECTOR := "InputDetector"
 
 
 func _enable_plugin() -> void:
-    add_autoload_singleton(INPUT_DETECTOR, "res://addons/commons/globals/input_detector.gd")
+    var addon_path: String = get_script().get_path().get_base_dir()
+    add_autoload_singleton(INPUT_DETECTOR, addon_path.path_join("globals/input_detector.gd"))
 
 
 func _disable_plugin() -> void:
