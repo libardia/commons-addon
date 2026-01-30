@@ -16,7 +16,8 @@ func _input(event: InputEvent) -> void:
     var source: Source = current_source
     var controller_type: Controller = current_controller_type
     if (
-        (event is InputEventMouse and not event.relative.is_zero_approx()) or
+        (event is InputEventMouseMotion and not event.relative.is_zero_approx()) or
+        event is InputEventMouseButton or
         event is InputEventKey
     ):
         source = Source.KEYBOARD_MOUSE
