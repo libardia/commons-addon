@@ -1,35 +1,47 @@
 extends Node
 
 
-enum InputSource { KEYBOARD_MOUSE, CONTROLLER }
-enum ControllerType { NONE, XBOX, PLAYSTATION, SWITCH, GENERIC }
+enum Source { KEYBOARD_MOUSE, CONTROLLER }
+enum Controller { NONE, XBOX, PLAYSTATION, SWITCH, GENERIC }
 
-var current_source := InputSource.KEYBOARD_MOUSE
-var current_controller_type := ControllerType.NONE
+var _current_source := Source.KEYBOARD_MOUSE
+var current_source: Source:
+    get: return _current_source
+    set(_value): pass # ignore set
+
+var _current_controller_type := Controller.NONE
+var current_controller_type: Controller:
+    get: return _current_controller_type
+    set(_value): pass # ignore set
+
+var deadzone_filter := 0.2
 
 signal source_changed()
 
 
 func _input(event: InputEvent) -> void:
     # Translate event to device type
-    var source: InputSource = current_source
-    var controller_type: ControllerType = current_controller_type
-    if event is InputEventMouse or event is InputEventKey:
-        source = InputSource.KEYBOARD_MOUSE
-        controller_type = ControllerType.NONE
+    var source: Source = current_source
+    var controller_type: Controller = current_controller_type
+    if (
+        (event is InputEventMouse and not event.relative.is_zero_approx()) or
+        event is InputEventKey
+    ):
+        source = Source.KEYBOARD_MOUSE
+        controller_type = Controller.NONE
     elif (
-        (event is InputEventJoypadMotion and abs(event.axis_value) > 0.2) or
+        (event is InputEventJoypadMotion and abs(event.axis_value) > deadzone_filter) or
         event is InputEventJoypadButton
     ):
-        source = InputSource.CONTROLLER
+        source = Source.CONTROLLER
         var device_name := Input.get_joy_name(event.device).to_lower()
         if device_name.contains("xbox"):
-            controller_type = ControllerType.XBOX
+            controller_type = Controller.XBOX
         elif device_name.contains("dualsense"):
-            controller_type = ControllerType.PLAYSTATION
+            controller_type = Controller.PLAYSTATION
         else:
-            controller_type = ControllerType.GENERIC
-    if source != current_source or controller_type != controller_type:
-        current_source = source
-        current_controller_type = controller_type
+            controller_type = Controller.GENERIC
+    if source != current_source or controller_type != current_controller_type:
+        _current_source = source
+        _current_controller_type = controller_type
         source_changed.emit()
