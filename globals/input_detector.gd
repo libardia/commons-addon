@@ -38,3 +38,11 @@ func _input(event: InputEvent) -> void:
         current_source = source
         current_controller_type = controller_type
         source_changed.emit()
+
+
+func is_mkb() -> bool:
+    return current_source == Source.KEYBOARD_MOUSE
+
+
+func is_controller() -> bool:
+    return not is_mkb()
