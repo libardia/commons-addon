@@ -11,6 +11,13 @@ var deadzone_filter := 0.2
 signal source_changed()
 
 
+func _ready() -> void:
+    # Emit event once as the first scene is ready
+    get_tree().current_scene.ready.connect(source_changed.emit)
+    # Emit event once whenever the scene is changed (happens after ready)
+    get_tree().scene_changed.connect(source_changed.emit)
+
+
 func _input(event: InputEvent) -> void:
     # Translate event to device type
     var source: Source = current_source
