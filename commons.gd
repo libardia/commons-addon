@@ -1,10 +1,11 @@
 @tool
+class_name CommonsPlugin
 extends EditorPlugin
 
 
 const INPUT_DETECTOR := "InputDetector"
-var addon_path: String
 
+var addon_path: String
 
 func _enable_plugin() -> void:
     addon_path = get_script().get_path().get_base_dir()
@@ -16,10 +17,8 @@ func _disable_plugin() -> void:
 
 
 func _enter_tree() -> void:
-    # Initialization of the plugin goes here.
-    pass
+    ExtendedCollisionPolygon2D.undo_redo = get_undo_redo()
 
 
 func _exit_tree() -> void:
-    # Clean-up of the plugin goes here.
-    pass
+    ExtendedCollisionPolygon2D.undo_redo = null

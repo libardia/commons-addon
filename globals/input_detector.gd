@@ -13,9 +13,9 @@ signal source_changed()
 
 func _ready() -> void:
     # Emit event once as the first scene is ready
-    get_tree().current_scene.ready.connect(source_changed.emit)
+    get_tree().current_scene.ready.connect(log_and_emit)
     # Emit event once whenever the scene is changed (happens after ready)
-    get_tree().scene_changed.connect(source_changed.emit)
+    get_tree().scene_changed.connect(log_and_emit)
 
 
 func _input(event: InputEvent) -> void:
@@ -44,7 +44,7 @@ func _input(event: InputEvent) -> void:
     if source != current_source or controller_type != current_controller_type:
         current_source = source
         current_controller_type = controller_type
-        source_changed.emit()
+        log_and_emit()
 
 
 func is_mkb() -> bool:
@@ -53,3 +53,13 @@ func is_mkb() -> bool:
 
 func is_controller() -> bool:
     return not is_mkb()
+
+
+func log_and_emit():
+    print(
+        "InputDetector: ",
+        "Input source changed: ",
+        "source ", Source.keys()[current_source], ", ",
+        "controller ", Controller.keys()[current_controller_type],
+    )
+    source_changed.emit()
