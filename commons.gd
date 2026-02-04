@@ -7,6 +7,7 @@ const INPUT_DETECTOR := "InputDetector"
 
 var addon_path: String
 
+
 func _enable_plugin() -> void:
     addon_path = get_script().get_path().get_base_dir()
     add_autoload_singleton(INPUT_DETECTOR, addon_path.path_join("globals/input_detector.gd"))
@@ -17,8 +18,10 @@ func _disable_plugin() -> void:
 
 
 func _enter_tree() -> void:
-    ExtendedCollisionPolygon2D.undo_redo = get_undo_redo()
+    # init plugin
+    pass
 
 
 func _exit_tree() -> void:
-    ExtendedCollisionPolygon2D.undo_redo = null
+    # cleanup plugin
+    pass
