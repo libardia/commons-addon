@@ -15,13 +15,3 @@ func _enable_plugin() -> void:
 
 func _disable_plugin() -> void:
     remove_autoload_singleton(INPUT_DETECTOR)
-
-
-func _enter_tree() -> void:
-    # init plugin
-    pass
-
-
-func _exit_tree() -> void:
-    # cleanup plugin
-    pass

@@ -5,6 +5,7 @@ extends CollisionPolygon2D
 
 @export_tool_button("Move origin to center of mass") var calc_center := calculate_com
 
+
 func calculate_com():
     # Ignore this entirely if running ingame
     if Engine.is_editor_hint():
