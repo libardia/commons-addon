@@ -4,9 +4,11 @@ extends Node
 enum Source { KEYBOARD_MOUSE, CONTROLLER }
 enum Controller { NONE, XBOX, PLAYSTATION, SWITCH, GENERIC }
 
+const DEFAULT_DEADZONE_FILTER := 0.2
+
 var current_source := Source.KEYBOARD_MOUSE
 var current_controller_type := Controller.NONE
-var deadzone_filter := 0.2
+var deadzone_filter := DEFAULT_DEADZONE_FILTER
 
 signal source_changed()
 
