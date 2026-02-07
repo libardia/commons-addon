@@ -1,7 +1,7 @@
-extends Node
+class_name NodeUtil
 
 
-func absolute_z(node: Node2D) -> int:
+static func absolute_z(node: Node2D) -> int:
     var working = node
     var z_index = 0
     while working and working is Node2D:
