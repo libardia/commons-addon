@@ -13,7 +13,7 @@ func _init() -> void:
 func choose_once(rng: RandomNumberGenerator = null) -> Resource:
     _check_config()
     var f = rng.randf() if rng else randf()
-    var result = f * weights.reduce(func(acc, elem): return acc + elem, 0)
+    var result = f * weights.reduce(func(acc, elem): return acc + elem, 0.0)
     var cursor = 0.0
     for i in choices.size():
         cursor += weights[i]
@@ -24,4 +24,7 @@ func choose_once(rng: RandomNumberGenerator = null) -> Resource:
 
 
 func _check_config():
-    assert(weights.size() == choices.size(), "'choices' and 'weights' must be the same length.")
+    assert(
+        weights.size() == choices.size(),
+        "'choices' and 'weights' must be the same length."
+    )
