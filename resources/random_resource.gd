@@ -18,3 +18,9 @@ func choose(rng: RandomNumberGenerator = null) -> Resource:
 func choose_once(rng: RandomNumberGenerator = null) -> Resource:
     var i = rng.randi() if rng else randi()
     return choices[i % choices.size()]
+
+
+static func with(...choices: Array) -> RandomResource:
+    var rr = RandomResource.new()
+    rr.choices.assign(choices)
+    return rr
