@@ -3,7 +3,7 @@ extends Area2D
 
 
 ## The node to which this Area2D belongs. If null, this will be assumed to be its parent.
-@export var owned_by: Node2D
+@export var owned_by: Node
 
 
 func _enter_tree() -> void:
