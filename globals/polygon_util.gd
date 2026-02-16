@@ -10,7 +10,7 @@ static var circle_cache := {}
 
 
 static func generate_circle(position: Vector2, radius: float, num_sides: int) -> PackedVector2Array:
-    var k = [position, radius, num_sides]
+    var k := [position, radius, num_sides]
     if k in circle_cache:
         return circle_cache[k]
 
@@ -24,6 +24,10 @@ static func generate_circle(position: Vector2, radius: float, num_sides: int) ->
 
     circle_cache[k] = polygon
     return polygon
+
+
+static func clear_circle_cache() -> void:
+    circle_cache = {}
 
 
 static func offset_polygon(polygon: PackedVector2Array, offset: Vector2) -> PackedVector2Array:
@@ -45,14 +49,14 @@ static func polygon_bounds(polygon: PackedVector2Array) -> Rect2:
             max_point.x = point.x
         if max_point.y < point.y:
             max_point.y = point.y
-    var result = Rect2()
+    var result := Rect2()
     result.position = min_point
     result.end = max_point
     return result
 
 
 static func find_top_left(polygon: PackedVector2Array) -> Vector2:
-    var min_point = polygon[0]
+    var min_point := polygon[0]
     for point in polygon:
         if min_point.x > point.x:
             min_point.x = point.x
@@ -84,7 +88,7 @@ static func cut_polygon(polygon: PackedVector2Array, cut_point: Vector2) -> CutR
     else:
         bounds.end.y = cut_point.y
         bounds = bounds.grow_individual(1, 1, 1, 0)
-    var clip = rect_to_polygon(bounds)
+    var clip := rect_to_polygon(bounds)
     var cut_result := CutResult.new()
     cut_result.side_a = Geometry2D.intersect_polygons(polygon, clip)
     cut_result.side_b = Geometry2D.clip_polygons(polygon, clip)
@@ -94,7 +98,7 @@ static func cut_polygon(polygon: PackedVector2Array, cut_point: Vector2) -> CutR
 static func decide_cut_direction_by_center(rect: Rect2, cut_pos: Vector2) -> bool:
     cut_pos -= rect.position
     rect.position = Vector2.ZERO
-    var diff = (rect.size / 2) - cut_pos
+    var diff := (rect.size / 2) - cut_pos
     return abs(diff.x) <= abs(diff.y)
 
 
@@ -109,7 +113,7 @@ static func polygon_area(polygon: PackedVector2Array) -> float:
     var s2 := 0.0
     for i in num_points:
         var v := polygon[i]
-        var nv = polygon[(i - 1) % num_points]
+        var nv := polygon[(i - 1) % num_points]
         s1 += v.x * nv.y
         s2 += v.y * nv.x
     return (s2 - s1) * 0.5

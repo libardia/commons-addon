@@ -6,13 +6,13 @@ extends CollisionPolygon2D
 @export_tool_button("Move origin to center of mass") var calc_center := calculate_com
 
 
-func calculate_com():
+func calculate_com() -> void:
     # Ignore this entirely if running ingame
     if Engine.is_editor_hint():
         # Get the editor's undo redo manager
-        var undo_redo = EditorInterface.get_editor_undo_redo()
+        var undo_redo := EditorInterface.get_editor_undo_redo()
         # Calculate center of mass
-        var com = PolygonUtil.polygon_center_of_mass(polygon)
+        var com := PolygonUtil.polygon_center_of_mass(polygon)
         # New undo-able action
         undo_redo.create_action("Move origin to center of mass")
         # Set these properties on do

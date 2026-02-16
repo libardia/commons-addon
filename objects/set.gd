@@ -12,8 +12,8 @@ func add(item: Variant) -> bool:
         return true
 
 
-func add_all(items: Array):
-    for i in items:
+func add_all(array: Array) -> void:
+    for i: Variant in array:
         add(i)
 
 

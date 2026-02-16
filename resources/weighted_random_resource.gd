@@ -12,9 +12,9 @@ func _init() -> void:
 ## Choose one of the options at random, weighted corresponding to the weights array.
 func choose_once(rng: RandomNumberGenerator = null) -> Resource:
     _check_config()
-    var f = rng.randf() if rng else randf()
-    var result = f * weights.reduce(func(acc, elem): return acc + elem, 0.0)
-    var cursor = 0.0
+    var f := rng.randf() if rng else randf()
+    var result := f * _total_weight()
+    var cursor := 0.0
     for i in choices.size():
         cursor += weights[i]
         if result <= cursor:
@@ -23,7 +23,15 @@ func choose_once(rng: RandomNumberGenerator = null) -> Resource:
     return null
 
 
-func _check_config():
+func _total_weight() -> float:
+    var total_weight := 0.0
+    for w: float in weights:
+        total_weight += w
+    return total_weight
+
+
+
+func _check_config() -> void:
     assert(
         weights.size() == choices.size(),
         "'choices' and 'weights' must be the same length."

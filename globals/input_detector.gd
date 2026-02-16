@@ -57,7 +57,7 @@ func is_controller() -> bool:
     return not is_mkb()
 
 
-func log_and_emit():
+func log_and_emit() -> void:
     print(
         "InputDetector: ",
         "Input source changed: ",
