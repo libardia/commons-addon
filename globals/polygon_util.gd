@@ -65,21 +65,31 @@ static func find_top_left(polygon: PackedVector2Array) -> Vector2:
     return min_point
 
 
-static func rect_to_polygon(rect: Rect2) -> PackedVector2Array:
-    return PackedVector2Array([
-        rect.position,
-        Vector2(rect.position.x, rect.end.y),
-        rect.end,
-        Vector2(rect.end.x, rect.position.y)
-    ])
+static func rect_to_polygon(rect: Rect2, clockwise: bool = true) -> PackedVector2Array:
+    if clockwise:
+        # this is "clockwise" to match the defaults of Geometry2D, which use a y-up
+        # coordinate system instead of screenspace y-down.
+        return PackedVector2Array([
+            rect.position, # top left
+            Vector2(rect.position.x, rect.end.y), # bottom left
+            rect.end, # bottom right
+            Vector2(rect.end.x, rect.position.y), # top right
+        ])
+    else:
+        return PackedVector2Array([
+            rect.position, # top left
+            Vector2(rect.end.x, rect.position.y), # top right
+            rect.end, # bottom right
+            Vector2(rect.position.x, rect.end.y), # bottom left
+        ])
 
 
 static func polygon_bounds_as_polygon(polygon: PackedVector2Array) -> PackedVector2Array:
     return rect_to_polygon(polygon_bounds(polygon))
 
 
-# Returns an array of arrays of PackedVector2Arrays, representing the two pieces the polygon will be cut into.
-# First result is the top or left side, the second result is the bottom or right side (depending on vertical).
+## Returns an array of arrays of PackedVector2Arrays, representing the two pieces the polygon will be cut into.
+## First result is the top or left side, the second result is the bottom or right side (depending on vertical).
 static func cut_polygon(polygon: PackedVector2Array, cut_point: Vector2) -> CutResult:
     var bounds := polygon_bounds(polygon)
     if decide_cut_direction_by_aspect(bounds):
@@ -108,28 +118,28 @@ static func decide_cut_direction_by_aspect(rect: Rect2) -> bool:
 
 static func polygon_area(polygon: PackedVector2Array) -> float:
     # Area of arbitrary polygon algorithm
-    var num_points := polygon.size()
+    var n := polygon.size()
     var s1 := 0.0
     var s2 := 0.0
-    for i in num_points:
+    for i in n:
         var v := polygon[i]
-        var nv := polygon[(i - 1) % num_points]
+        var nv := polygon[(i - 1) % n]
         s1 += v.x * nv.y
         s2 += v.y * nv.x
     return (s2 - s1) * 0.5
 
 
 static func polygon_center_of_mass(polygon: PackedVector2Array) -> Vector2:
-    var num_points := polygon.size()
-    var area := polygon_area(polygon)
+    var n := polygon.size()
+    var a := polygon_area(polygon)
     var rx := 0.0
     var ry := 0.0
 
-    for i in num_points:
+    for i in n:
         var v := polygon[i]
-        var nv := polygon[(i + 1) % num_points]
+        var nv := polygon[(i + 1) % n]
         var f := (v.x * nv.y) - (nv.x * v.y)
         rx += (v.x + nv.x) * f
         ry += (v.y + nv.y) * f
 
-    return Vector2(rx, ry) / (6 * area)
+    return Vector2(rx, ry) / (6 * a)

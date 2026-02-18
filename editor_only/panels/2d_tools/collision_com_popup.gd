@@ -13,8 +13,11 @@ func _on_id_pressed(id: int) -> void:
 func _adjust_origin_com() -> void:
     urm.create_action("Adjust polygon's origin for CollisionPolygon2D node(s)")
     _do_for_each_in_selection(func(cp: CollisionPolygon2D) -> void:
-        urm.add_do_property(cp, "position", cp.position + Vector2(10,10))
+        var com := PolygonUtil.polygon_center_of_mass(cp.polygon)
         urm.add_undo_property(cp, "position", cp.position)
+        urm.add_undo_property(cp, "polygon", cp.polygon)
+        urm.add_do_property(cp, "position", cp.position + com)
+        urm.add_do_property(cp, "polygon", PolygonUtil.offset_polygon(cp.polygon, -com))
     )
     urm.commit_action()
 
