@@ -23,8 +23,11 @@ func _enter_tree() -> void:
 func _refresh() -> void:
     # not (e and not s) = not e or s
     var should_show := not Engine.is_editor_hint() or show_in_editor
-    if should_show and not _ui_instance:
-        _ui_instance = ui_scene.instantiate()
-        add_child(_ui_instance)
+    if should_show:
+        if _ui_instance:
+            _ui_instance.queue_free()
+        if ui_scene:
+            _ui_instance = ui_scene.instantiate()
+            add_child(_ui_instance)
     elif not should_show and _ui_instance:
         _ui_instance.queue_free()
