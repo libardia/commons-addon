@@ -49,5 +49,9 @@ func adjust(amount: float) -> void:
                 belongs_to.queue_free()
 
 
+func is_full() -> bool:
+    return is_equal_approx(max_health, current_health)
+
+
 static func get_from(node: Node) -> HealthComponent:
     return node.get_node_or_null(UNIQUE_NAME)
