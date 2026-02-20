@@ -3,7 +3,7 @@ extends EditorPlugin
 
 const INPUT_DETECTOR := "InputDetector"
 
-const _2D_TOOLS_PANEL = preload("uid://cepebcwn18u6m")
+const _2D_TOOLS_PANEL: PackedScene = preload("uid://cepebcwn18u6m")
 var _2d_tools_panel: Control
 
 var _addon_path: String
