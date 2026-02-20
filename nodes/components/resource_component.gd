@@ -2,50 +2,58 @@ class_name ResourceComponent
 extends Component
 
 
-signal health_depleted
-signal changed(amount: float, before: float)
+signal depleted
+signal changed(amount: float, actual_change: float)
 
-## The health this entity currently has.
-@export var current_health: float
-## The maximum health of this entity. If [member capped] is [code]true[/code],
-## [member current_health] will be clamped to this value.
-@export var max_health: float
-## If [memner current_health] should be capped at [member max_health]. When [code]true[/code],
-## [member current_health] is clamped to [member max_health].
-@export var capped: bool = false
-## When [code]true[/code], the health of this entity cannot be changed.
+## The current value of this resource.
+@export var current: int
+## The maximum value of this resource. If [member capped] is [code]true[/code],
+## [member current] will be clamped to this value.
+@export var max_value: int
+## If [member current] should be clamped to [member max_value].
+@export var capped: bool = true
+## When [code]true[/code], the value of this resource cannot be changed.
 @export var locked: bool = false
 @export_group("When Depleted", "when_depleted_")
-## If this entity should automatically lock when depleted for the first time, preventing changes.
-## If necessary, the health can be unlocked by setting [member locked] to [code]false[/code].
-@export var when_depleted_lock: bool = true
-## If this entity should be freed when health is depleted. Specifically,
+## If this resource should automatically lock when depleted, preventing changes.
+## If necessary, it can be unlocked by setting [member locked] to [code]false[/code].
+@export var when_depleted_lock: bool = false
+## If the owning entity should be freed when this resource is depleted. Specifically,
 ## [code]belongs_to.queue_free()[/code] will be called.
 @export var when_depleted_free_owner: bool = false
 
-
-func damage(amount: float) -> void:
+func damage(amount: int) -> void:
     adjust(-amount)
 
 
-func heal(amount: float) -> void:
+func heal(amount: int) -> void:
     adjust(amount)
 
 
-func adjust(amount: float) -> void:
+func adjust(amount: int) -> void:
     if not locked:
-        var before := current_health
-        current_health += amount
-        if capped and current_health > max_health:
-            current_health = max_health
-        changed.emit(amount, before)
-        if before > 0 and current_health <= 0:
-            if when_depleted_lock:
-                locked = true
-            health_depleted.emit()
-            if when_depleted_free_owner:
-                belongs_to.queue_free()
+        var before := current
+        current += amount
+        if capped and current > max_value:
+            current = max_value
+        if current < 0:
+            current = 0
+        changed.emit(amount, current - before)
+        if before > 0 and current == 0:
+            _depleted()
 
 
 func is_full() -> bool:
-    return is_equal_approx(max_health, current_health)
+    return current == max_value
+
+
+func is_empty() -> bool:
+    return current == 0
+
+
+func _depleted() -> void:
+    if when_depleted_lock:
+        locked = true
+    if when_depleted_free_owner:
+        belongs_to.queue_free()
+    depleted.emit()
