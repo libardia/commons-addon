@@ -5,6 +5,10 @@ extends PopupMenu
 static var urm := EditorInterface.get_editor_undo_redo()
 
 
+func _ready() -> void:
+    id_pressed.connect(_on_id_pressed)
+
+
 func _on_id_pressed(id: int) -> void:
     match id:
         0: _adjust_origin_com()

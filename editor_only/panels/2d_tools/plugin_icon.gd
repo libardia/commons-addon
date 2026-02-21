@@ -2,7 +2,7 @@
 extends "res://addons/commons/editor_only/nodes/button_editor_icon.gd"
 
 
-func _enter_tree() -> void:
+func _ready() -> void:
     pressed.connect(_on_pressed)
 
 

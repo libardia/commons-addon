@@ -6,6 +6,7 @@ extends "res://addons/commons/editor_only/nodes/button_editor_icon.gd"
 
 
 func _ready() -> void:
+    pressed.connect(_on_pressed)
     EditorInterface.get_selection().selection_changed.connect(_on_selection_changed)
 
 

@@ -87,7 +87,3 @@ item_count = 1
 item_0/text = "Adjust origin to geometric center of mass"
 item_0/id = 0
 script = ExtResource("4_074kb")
-
-[connection signal="pressed" from="HBoxContainer/PluginIcon" to="HBoxContainer/PluginIcon" method="_on_pressed"]
-[connection signal="pressed" from="HBoxContainer/CollisionPolygonCOM" to="HBoxContainer/CollisionPolygonCOM" method="_on_pressed"]
-[connection signal="id_pressed" from="HBoxContainer/CollisionPolygonCOM/PopupMenu" to="HBoxContainer/CollisionPolygonCOM/PopupMenu" method="_on_id_pressed"]
