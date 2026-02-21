@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://cepebcwn18u6m"]
 
-[ext_resource type="Script" uid="uid://gcmnrn85xxvs" path="res://addons/commons/editor_only/texture_rect_editor_icon.gd" id="1_cwbuo"]
+[ext_resource type="Script" uid="uid://gcmnrn85xxvs" path="res://addons/commons/editor_only/nodes/texture_rect_editor_icon.gd" id="1_cwbuo"]
 [ext_resource type="Script" uid="uid://nqd2vin6ewbc" path="res://addons/commons/editor_only/panels/2d_tools/plugin_icon.gd" id="1_hamk0"]
 [ext_resource type="Script" uid="uid://c2e8eyckv4no6" path="res://addons/commons/editor_only/panels/2d_tools/collision_polygon_com.gd" id="2_cwbuo"]
 [ext_resource type="Script" uid="uid://wc2x2qgaiyv0" path="res://addons/commons/editor_only/panels/2d_tools/collision_com_popup.gd" id="4_074kb"]
 
-[sub_resource type="DPITexture" id="DPITexture_qfhfe"]
+[sub_resource type="DPITexture" id="DPITexture_074kb"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#f0caa0\" d=\"M2 1a1 1 0 00-1 1v8a1 1 0 001 1h3v.25a2 2 0 102 0V11h3a1 1 0 001-1V7h.25a2 2 0 100-2H11V2a1 1 0 00-1-1z\"/></svg>
 "
 saturation = 2.0
@@ -15,7 +15,7 @@ Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
 Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
 }
 
-[sub_resource type="DPITexture" id="DPITexture_o1jw1"]
+[sub_resource type="DPITexture" id="DPITexture_qfhfe"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"m3.308 15-2-2a1 1 0 0 1 1.414-1.414l.293.293V3.293h8.586L11.308 3a1 1 0 0 1 1.415-1.414l2 2a1 1 0 0 1 0 1.414l-2 2a1 1 0 0 1-1.415-1.414l.293-.293H5.015v6.586l.294-.293A1 1 0 0 1 6.723 13l-2 2a1 1 0 0 1-1.414 0z\"/></svg>
 "
 saturation = 2.0
@@ -25,7 +25,7 @@ Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
 Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
 }
 
-[sub_resource type="DPITexture" id="DPITexture_lljqt"]
+[sub_resource type="DPITexture" id="DPITexture_o1jw1"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"none\" stroke=\"#8da5f3\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M14 14H2V2h12L8 8z\"/></svg>
 "
 saturation = 2.0
@@ -53,7 +53,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-icon = SubResource("DPITexture_qfhfe")
+icon = SubResource("DPITexture_074kb")
 flat = true
 script = ExtResource("1_hamk0")
 icon_name = &"EditorPlugin"
@@ -62,7 +62,7 @@ icon_name = &"EditorPlugin"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = SubResource("DPITexture_o1jw1")
+texture = SubResource("DPITexture_qfhfe")
 script = ExtResource("1_cwbuo")
 icon_name = &"2D"
 
@@ -75,7 +75,7 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-icon = SubResource("DPITexture_lljqt")
+icon = SubResource("DPITexture_o1jw1")
 script = ExtResource("2_cwbuo")
 icon_name = &"CollisionPolygon2D"
 
@@ -83,7 +83,6 @@ icon_name = &"CollisionPolygon2D"
 oversampling_override = 1.0
 title = "Tools for CollisionPolygon2D"
 size = Vector2i(359, 100)
-visible = true
 item_count = 1
 item_0/text = "Adjust origin to geometric center of mass"
 item_0/id = 0
