@@ -1,5 +1,5 @@
 @tool
-extends "res://addons/commons/editor_only/button_editor_icon.gd"
+extends "res://addons/commons/editor_only/nodes/button_editor_icon.gd"
 
 
 func _enter_tree() -> void:
