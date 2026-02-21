@@ -22,6 +22,11 @@ signal changed(amount: float, actual_change: float)
 ## [code]belongs_to.queue_free()[/code] will be called.
 @export var when_depleted_free_owner: bool = false
 
+
+func _init() -> void:
+    depleted.connect(_on_depleted)
+
+
 func damage(amount: int) -> void:
     adjust(-amount)
 
@@ -40,7 +45,7 @@ func adjust(amount: int) -> void:
             current = 0
         changed.emit(amount, current - before)
         if before > 0 and current == 0:
-            _depleted()
+            depleted.emit()
 
 
 func is_full() -> bool:
@@ -51,9 +56,8 @@ func is_empty() -> bool:
     return current == 0
 
 
-func _depleted() -> void:
+func _on_depleted() -> void:
     if when_depleted_lock:
         locked = true
     if when_depleted_free_owner:
         belongs_to.queue_free()
-    depleted.emit()

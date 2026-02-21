@@ -2,7 +2,8 @@
 extends Node
 
 
-## The entity this component belongs to.
+## The entity this component belongs to. If [code]null[/code], this is assumed to
+## be this node's parent.
 @export var belongs_to: Node
 
 func _enter_tree() -> void:

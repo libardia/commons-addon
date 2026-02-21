@@ -6,6 +6,9 @@ const INPUT_DETECTOR := "InputDetector"
 const _2D_TOOLS_PANEL: PackedScene = preload("uid://cepebcwn18u6m")
 var _2d_tools_panel: Control
 
+const ContextMenuResaveScene = preload("uid://c4u1otp7tjot3")
+var context_resave_scene: ContextMenuResaveScene
+
 var _addon_path: String
 
 
@@ -21,7 +24,10 @@ func _disable_plugin() -> void:
 func _enter_tree() -> void:
     _2d_tools_panel = _2D_TOOLS_PANEL.instantiate()
     add_control_to_container(CONTAINER_CANVAS_EDITOR_SIDE_LEFT, _2d_tools_panel)
+    context_resave_scene = ContextMenuResaveScene.new()
+    add_context_menu_plugin(EditorContextMenuPlugin.CONTEXT_SLOT_FILESYSTEM, context_resave_scene)
 
 
 func _exit_tree() -> void:
     remove_control_from_container(CONTAINER_CANVAS_EDITOR_SIDE_LEFT, _2d_tools_panel)
+    remove_context_menu_plugin(context_resave_scene)
