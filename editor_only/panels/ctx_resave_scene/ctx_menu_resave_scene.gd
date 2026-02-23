@@ -20,7 +20,9 @@ func _path_is_scene(path: String) -> bool:
 func resave_scenes(paths: PackedStringArray) -> void:
     for path in paths:
         if _path_is_scene(path):
+            var already_open := path in EditorInterface.get_open_scenes()
             EditorInterface.open_scene_from_path(path)
             if EditorInterface.save_scene() != OK:
                 push_error("Error saving scene '", path, "'!")
-            EditorInterface.close_scene()
+            if not already_open:
+                EditorInterface.close_scene()
