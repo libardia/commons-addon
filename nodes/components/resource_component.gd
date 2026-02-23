@@ -1,3 +1,4 @@
+## Tracks a resource the parent node has, such as health or stamina.
 class_name ResourceComponent
 extends Component
 
@@ -18,9 +19,9 @@ signal changed(amount: float, actual_change: float)
 ## If this resource should automatically lock when depleted, preventing changes.
 ## If necessary, it can be unlocked by setting [member locked] to [code]false[/code].
 @export var when_depleted_lock: bool = false
-## If the owning entity should be freed when this resource is depleted. Specifically,
-## [code]belongs_to.queue_free()[/code] will be called.
-@export var when_depleted_free_owner: bool = false
+## If the node should be freed when this resource is depleted. Specifically,
+## [code]get_parent().queue_free()[/code] will be called.
+@export var when_depleted_free_parent: bool = false
 
 
 func _init() -> void:
@@ -59,5 +60,5 @@ func is_empty() -> bool:
 func _on_depleted() -> void:
     if when_depleted_lock:
         locked = true
-    if when_depleted_free_owner:
-        belongs_to.queue_free()
+    if when_depleted_free_parent:
+        get_parent().queue_free()
