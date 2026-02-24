@@ -4,25 +4,16 @@ extends EditorContextMenuPlugin
 func _popup_menu(paths: PackedStringArray) -> void:
     var show := false
     for path in paths:
-        if _path_is_scene(path):
+        if EditorUtil.file_is_scene(path):
             show = true
             break
     if show:
         add_context_menu_item(
-            "Resave selected scene(s)", resave_scenes, EditorIcons.by_name("Save")
+            "Resave selected scene(s)",
+            _resave_scenes,
+            EditorIcons.by_name("Save")
         )
 
 
-func _path_is_scene(path: String) -> bool:
-    return path.ends_with(".tscn") or path.ends_with(".scn")
-
-
-func resave_scenes(paths: PackedStringArray) -> void:
-    for path in paths:
-        if _path_is_scene(path):
-            var already_open := path in EditorInterface.get_open_scenes()
-            EditorInterface.open_scene_from_path(path)
-            if EditorInterface.save_scene() != OK:
-                push_error("Error saving scene '", path, "'!")
-            if not already_open:
-                EditorInterface.close_scene()
+func _resave_scenes(paths: Array[String]) -> void:
+    EditorUtil.resave_scenes(paths.filter(EditorUtil.file_is_scene))

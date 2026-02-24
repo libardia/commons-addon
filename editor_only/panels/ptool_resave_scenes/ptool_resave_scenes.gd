@@ -14,26 +14,21 @@ static func run() -> void:
 
 
 static func _confirm() -> void:
-    _resave_scenes_recurse("res://")
+    var scene_paths: Array[String] = []
+    _find_all_scenes("res://", scene_paths)
+    EditorUtil.resave_scenes(scene_paths)
     _cleanup()
 
 
-static func _resave_scenes_recurse(dir: String) -> void:
+static func _find_all_scenes(dir: String, acc: Array[String]) -> void:
     var da := DirAccess.open(dir)
     if dir.trim_suffix("/") == "res://addons" or da.file_exists(dir.path_join(".gdignore")):
         return
     for file in da.get_files():
-        if file.ends_with(".tscn") or file.ends_with(".scn"):
-            var path := dir.path_join(file)
-            var already_open := path in EditorInterface.get_open_scenes()
-            EditorInterface.open_scene_from_path(path)
-            EditorInterface.save_scene()
-            if EditorInterface.save_scene() != OK:
-                push_error("Error saving scene '", path, "'!")
-            if not already_open:
-                EditorInterface.close_scene()
+        if EditorUtil.file_is_scene(file):
+            acc.append(dir.path_join(file))
     for inner_dir in da.get_directories():
-        _resave_scenes_recurse(dir.path_join(inner_dir))
+        _find_all_scenes(dir.path_join(inner_dir), acc)
 
 
 static func _cleanup() -> void:
