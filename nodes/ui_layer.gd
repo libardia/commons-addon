@@ -6,12 +6,14 @@ extends CanvasLayer
 @export var ui_scene: PackedScene:
     set(value):
         ui_scene = value
-        _refresh()
+        if is_node_ready():
+            _refresh()
 
 @export var show_in_editor: bool = false:
     set(value):
         show_in_editor = value
-        _refresh()
+        if is_node_ready():
+            _refresh()
 
 var _ui_instance: Node
 
