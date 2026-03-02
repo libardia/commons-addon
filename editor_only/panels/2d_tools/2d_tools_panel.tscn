@@ -35,7 +35,7 @@ Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
 Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
 }
 
-[node name="2DToolsPanel" type="MarginContainer" unique_id=2127651103]
+[node name="2DToolsPanel" type="MarginContainer" unique_id=988965438]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -46,10 +46,10 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=1385093402]
+[node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=1313344323]
 layout_mode = 2
 
-[node name="PluginIcon" type="Button" parent="HBoxContainer" unique_id=2080909842]
+[node name="PluginIcon" type="Button" parent="HBoxContainer" unique_id=1343892112]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -58,7 +58,7 @@ flat = true
 script = ExtResource("1_hamk0")
 icon_name = &"EditorPlugin"
 
-[node name="2DIcon" type="TextureRect" parent="HBoxContainer" unique_id=1427384307]
+[node name="2DIcon" type="TextureRect" parent="HBoxContainer" unique_id=2066342196]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -66,10 +66,10 @@ texture = SubResource("DPITexture_qfhfe")
 script = ExtResource("1_cwbuo")
 icon_name = &"2D"
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer" unique_id=1254206843]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer" unique_id=667113481]
 layout_mode = 2
 
-[node name="CollisionPolygonCOM" type="Button" parent="HBoxContainer" unique_id=1498721603]
+[node name="CollisionPolygonCOM" type="Button" parent="HBoxContainer" unique_id=1872171085]
 editor_description = "Tools for CollisionPolygon2D"
 visible = false
 layout_mode = 2
@@ -79,7 +79,7 @@ icon = SubResource("DPITexture_o1jw1")
 script = ExtResource("2_cwbuo")
 icon_name = &"CollisionPolygon2D"
 
-[node name="PopupMenu" type="PopupMenu" parent="HBoxContainer/CollisionPolygonCOM" unique_id=1586939741]
+[node name="PopupMenu" type="PopupMenu" parent="HBoxContainer/CollisionPolygonCOM" unique_id=1454843491]
 oversampling_override = 1.0
 title = "Tools for CollisionPolygon2D"
 size = Vector2i(359, 100)
