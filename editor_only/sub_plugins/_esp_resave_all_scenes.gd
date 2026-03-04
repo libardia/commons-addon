@@ -1,7 +1,22 @@
-static var dialog: ConfirmationDialog
+@tool
+class_name EditorSubPluginResaveAllScenes
+extends EditorSubPlugin
 
 
-static func run() -> void:
+const NAME := "Commons: Resave all scenes"
+
+var dialog: ConfirmationDialog
+
+
+func enable(plugin: EditorPlugin) -> void:
+    plugin.add_tool_menu_item(NAME, run)
+
+
+func disable(plugin: EditorPlugin) -> void:
+    plugin.remove_tool_menu_item(NAME)
+
+
+func run() -> void:
     dialog = ConfirmationDialog.new()
     dialog.dialog_text = str(
         "All scenes in the project (except those in the res://addons folder)",
@@ -13,14 +28,14 @@ static func run() -> void:
     dialog.popup_centered()
 
 
-static func _confirm() -> void:
+func _confirm() -> void:
     var scene_paths: Array[String] = []
     _find_all_scenes("res://", scene_paths)
     EditorUtil.resave_scenes(scene_paths)
     _cleanup()
 
 
-static func _find_all_scenes(dir: String, acc: Array[String]) -> void:
+func _find_all_scenes(dir: String, acc: Array[String]) -> void:
     var da := DirAccess.open(dir)
     if dir.trim_suffix("/") == "res://addons" or da.file_exists(dir.path_join(".gdignore")):
         return
@@ -31,5 +46,5 @@ static func _find_all_scenes(dir: String, acc: Array[String]) -> void:
         _find_all_scenes(dir.path_join(inner_dir), acc)
 
 
-static func _cleanup() -> void:
+func _cleanup() -> void:
     dialog.queue_free()

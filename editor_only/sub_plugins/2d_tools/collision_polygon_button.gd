@@ -1,5 +1,5 @@
 @tool
-extends "res://addons/commons/editor_only/nodes/button_editor_icon.gd"
+extends ButtonEditorIcon
 
 
 @onready var popup_menu: PopupMenu = $PopupMenu

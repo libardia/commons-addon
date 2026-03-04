@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cepebcwn18u6m"]
 
 [ext_resource type="Script" uid="uid://gcmnrn85xxvs" path="res://addons/commons/editor_only/nodes/texture_rect_editor_icon.gd" id="1_cwbuo"]
-[ext_resource type="Script" uid="uid://nqd2vin6ewbc" path="res://addons/commons/editor_only/panels/2d_tools/plugin_icon.gd" id="1_hamk0"]
-[ext_resource type="Script" uid="uid://c2e8eyckv4no6" path="res://addons/commons/editor_only/panels/2d_tools/collision_polygon_com.gd" id="2_cwbuo"]
-[ext_resource type="Script" uid="uid://wc2x2qgaiyv0" path="res://addons/commons/editor_only/panels/2d_tools/collision_com_popup.gd" id="4_074kb"]
+[ext_resource type="Script" uid="uid://nqd2vin6ewbc" path="res://addons/commons/editor_only/sub_plugins/2d_tools/plugin_icon.gd" id="1_hamk0"]
+[ext_resource type="Script" uid="uid://c2e8eyckv4no6" path="res://addons/commons/editor_only/sub_plugins/2d_tools/collision_polygon_button.gd" id="2_cwbuo"]
+[ext_resource type="Script" uid="uid://wc2x2qgaiyv0" path="res://addons/commons/editor_only/sub_plugins/2d_tools/collision_polygon_popup.gd" id="4_074kb"]
 
 [sub_resource type="DPITexture" id="DPITexture_074kb"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#f0caa0\" d=\"M2 1a1 1 0 00-1 1v8a1 1 0 001 1h3v.25a2 2 0 102 0V11h3a1 1 0 001-1V7h.25a2 2 0 100-2H11V2a1 1 0 00-1-1z\"/></svg>
@@ -69,7 +69,7 @@ icon_name = &"2D"
 [node name="HSeparator" type="HSeparator" parent="HBoxContainer" unique_id=667113481]
 layout_mode = 2
 
-[node name="CollisionPolygonCOM" type="Button" parent="HBoxContainer" unique_id=1872171085]
+[node name="CollisionPolygonTools" type="Button" parent="HBoxContainer" unique_id=1872171085]
 editor_description = "Tools for CollisionPolygon2D"
 visible = false
 layout_mode = 2
@@ -79,7 +79,7 @@ icon = SubResource("DPITexture_o1jw1")
 script = ExtResource("2_cwbuo")
 icon_name = &"CollisionPolygon2D"
 
-[node name="PopupMenu" type="PopupMenu" parent="HBoxContainer/CollisionPolygonCOM" unique_id=1454843491]
+[node name="PopupMenu" type="PopupMenu" parent="HBoxContainer/CollisionPolygonTools" unique_id=1454843491]
 oversampling_override = 1.0
 title = "Tools for CollisionPolygon2D"
 size = Vector2i(359, 100)
