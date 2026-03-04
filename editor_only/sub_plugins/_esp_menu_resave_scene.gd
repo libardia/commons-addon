@@ -4,17 +4,15 @@ extends EditorSubPlugin
 
 
 const SLOT := EditorContextMenuPlugin.CONTEXT_SLOT_FILESYSTEM
-var _instance: Inner
+var _instance: Inner = Inner.new()
 
 
 func enable(plugin: EditorPlugin) -> void:
-    _instance = Inner.new()
     plugin.add_context_menu_plugin(SLOT, _instance)
 
 
 func disable(plugin: EditorPlugin) -> void:
     plugin.remove_context_menu_plugin(_instance)
-    _instance.free()
 
 
 class Inner extends EditorContextMenuPlugin:

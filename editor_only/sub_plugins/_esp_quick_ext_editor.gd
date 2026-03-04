@@ -24,6 +24,7 @@ func enable(plugin: EditorPlugin) -> void:
 
 func disable(plugin: EditorPlugin) -> void:
     plugin.remove_control_from_container(CONTAINER, checkbox)
+    settings.settings_changed.disconnect(_on_setting_changed)
     checkbox.free()
 
 
