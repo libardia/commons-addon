@@ -11,6 +11,7 @@ static var _sub_plugins: Array[EditorSubPlugin] = [
     EditorSubPlugin2DTools.new(),
     EditorSubPluginResaveAllScenes.new(),
     EditorSubPluginCtxResaveScene.new(),
+    #EditorSubPluginAutoConstants.new(),
 ]
 
 var _addon_path: String

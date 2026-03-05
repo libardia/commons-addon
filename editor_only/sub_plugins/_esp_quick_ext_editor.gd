@@ -13,7 +13,7 @@ var checkbox: CheckBox
 func enable(plugin: EditorPlugin) -> void:
     # Set up the checkbox
     checkbox = CheckBox.new()
-    checkbox.text = "Use External Editor"
+    checkbox.text = "External Script Editor"
     checkbox.toggled.connect(_on_toggled)
     settings.settings_changed.connect(_on_setting_changed)
     _on_setting_changed()
